@@ -60,8 +60,6 @@ function convertMs(ms) {
     return { days, hours, minutes, seconds };
 }
 
-
-
 elements.startBtn.setAttribute("disabled", "");
 
 flatpickr("input#datetime-picker", options);
@@ -72,11 +70,12 @@ function handlerStart() {
     const inputTime = new Date(elements.timeInput.value);
     const curDate = new Date;
     let difTime = inputTime - curDate;
+    elements.startBtn.setAttribute("disabled", "");
     if (difTime <= 0) {
         showError(); 
-        elements.startBtn.setAttribute("disabled", "");
         return;
     }
+    elements.timeInput.setAttribute("disabled", "");
     const id = setInterval(() => {
         const timing = convertMs(difTime);
         elements.days.textContent = addLeadingZero(timing.days);
